@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" v-model="FirstName"><br><br>
+        <input type="text" v-model="LastName"><br><br>
+        <span>{{FullName}}</span>
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                FirstName: 'John',
+                LastName: 'Doe'
+            },
+            computed: {
+                FullName: {
+                    //有人讀取就會調用get
+                    get: function () {
+                        return this.FirstName + '-' + this.LastName;
+                    },
+                    //有人修改就會調用set
+                    set: function (newValue) {
+                        const names = newValue.split('-');
+                        this.FirstName = names[0];
+                        this.LastName = names[1];
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
