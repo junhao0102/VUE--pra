@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>v-for</title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 遍歷陣列 -->
+        <h1>成員列表</h1>
+        <ul>
+            <li v-for="(p,index) in personArr" :key="index">
+                {{p.name}}--{{p.age}}---{{index}}
+            </li>
+
+        </ul>
+        <!-- 遍歷對象 -->
+        <h1>汽車資訊</h1>
+        <ul>
+            <li v-for="(value,key) in car" :key="key">
+                {{key}}--{{value}}
+            </li>
+        </ul>
+        <!-- 遍歷字串 -->
+        <h1>遍歷字串</h1>
+        <ul>
+            <li v-for="(value,key) in str" :key="key">
+                {{value}}---{{key}}
+            </li>
+        </ul>
+
+    </div>
+
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            personArr: [
+                { id: '001', name: '小明', age: 18 },
+                { id: '002', name: '小華', age: 32 },
+                { id: '003', name: '小美', age: 22 }
+            ],
+            car:{
+                brand:'toyota',
+                price:100,
+                color:'red'
+            },
+            str:'hello_world'
+
+        },
+    });
+</script>
+
+</html>

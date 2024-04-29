@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Vue set</title>
+</head>
+
+<body>
+    <div id="root">
+        <h1>姓名:{{info.name}}</h1>
+        <h1>年齡:{{info.age}}</h1>
+        <button @click ="addsex">點擊加上性別</button>
+        <h1 v-if ="info.sex">性別:{{info.sex}}</h1>
+    </div>
+
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#root',        
+        data: {
+            info:{
+                name:'lee sin',
+                age:20,
+            }
+
+        },
+        methods:{
+            addsex(){
+                vm.$set(this.info,'sex',"男") //$set無法在data或vm直接新增屬性
+            }
+        }
+      
+    });
+</script>
+
+</html>

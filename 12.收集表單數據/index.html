@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>表單</title>
+</head>
+
+<body>
+    <div id="root">
+        <form @submit="demo">
+            <label for="username">
+                帳號:<input type="text" id="username" v-model.trim="username"><!-- v-model.trim 將輸入的字串去除前空格 -->
+            </label>
+            <br><br>
+            <label for="password">
+                密碼:<input type="password" id="password" v-model="password">
+            </label>
+            <br><br>
+            性別:
+            男<input type="radio" name="sex" v-model="sex" value="male">
+            女<input type="radio" name="sex" v-model="sex" value="female">
+            <br><br>
+            年齡:<input type="number" v-model.number="age"><!-- v-model.number 將輸入的字串轉換為數字 -->
+            <br><br>
+            嗜好:
+            音樂<input type="checkbox" v-model="hobby" value="music">
+            運動<input type="checkbox" v-model="hobby" value="exercise">
+            電影<input type="checkbox" v-model="hobby" value="movie">
+            <br><br>
+            所屬校區:
+            <select v-model="city">
+                <option>請選擇校區</option>
+                <option value="taipei">台北</option>
+                <option value="taichung">台中</option>
+                <option value="kaohsiung">高雄</option>
+            </select>
+            <br><br>
+            其他信息:
+            <br><br>
+             <textarea v-model.lazy="other"></textarea><!--  v-model.lazy 將在失去焦點後更新 -->
+            <br><br>
+            <input type="checkbox" v-model="agree">閱讀並接受條款<a href="https://www.google.com.tw/?hl=zh_TW">用戶協議</a>
+            <br><br>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            username: '',
+            password: '',
+            sex: '',
+            age: 15,
+            hobby: [],
+            city: '',
+            other: '',
+            agree: '',
+
+        },
+        methods: {
+            demo(e) {
+                e.preventDefault();
+                console.log(JSON.stringify(this.$data));
+
+            }
+        }
+    })
+
+</script>
+
+</html>

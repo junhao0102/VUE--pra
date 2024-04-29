@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>v-show and v-if</title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 切換頻率高用show,切換頻率低用if -->
+
+        <!-- v-show -->
+        <!-- <h2 v-show="true" >歡迎來到網頁,{{name}}</h2> -->
+        <!-- v-if -->
+        <!-- <h2 v-if="true">歡迎來到網頁,{{name}}</h2> -->
+
+
+        <!-- <h1>當前的n值:{{n}}</h1>
+        <button @click="n++">點我增加n</button>
+        <div v-if="n==1">angular</div>
+        <div v-else-if="n==2">react</div>
+        <div v-else-if="n==3">vue</div> -->
+        
+
+        <!-- v-if與template的搭配 -->
+        <h1>當前的n值:{{n}}</h1>
+        <button @click="n++">點我增加n</button>
+        <template v-if="n==1">
+            <h1>a</h1>
+            <h1>b</h1>
+            <h1>c</h1>
+        </template>
+
+    </div>
+
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: "小明",
+            n: 0
+
+        },
+    });
+</script>
+
+</html>

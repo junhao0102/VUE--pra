@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>watch</title>
+</head>
+
+<body>
+    <div id="root">
+        <h1>成員列表</h1>
+        <input placeholder="請輸入名字" v-model="keyWord">
+        <ul>
+            <li v-for="(p,index) in filterArr" :key="p.id">
+                {{p.name}}--{{p.age}}--{{p.sex}}
+            </li>
+        </ul>
+    </div>
+
+</body>
+
+<!-- 用watch實現 -->
+<!-- <script>
+    const vm = new Vue({
+        el: '#root',
+        data: { 
+            keyWord: '',
+            personArr: [
+                { id: '001', name: '馬冬梅', age: 18 ,sex:"girl"},
+                { id: '002', name: '周冬雨', age: 19 ,sex:"girl"},
+                { id: '003', name: '周杰倫', age: 20 ,sex:"boy"},
+                { id: '004', name: '溫兆倫', age: 21 ,sex:"boy"}
+            ],
+            filterArr: [],
+            
+        },
+        watch:{
+            keyWord:{
+                immediate:true,//初始化時也觸發
+                handler(newVal){
+                    this.filterArr = this.personArr.filter((p)=>{
+                        return p.name.indexOf(newVal) !==-1
+                    })
+                    }
+                },
+        }
+    });
+</script> -->
+
+<!-- 用computed實現 -->
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            keyWord: '',
+            personArr: [
+                { id: '001', name: '馬冬梅', age: 18, sex: "girl" },
+                { id: '002', name: '周冬雨', age: 19, sex: "girl" },
+                { id: '003', name: '周杰倫', age: 20, sex: "boy" },
+                { id: '004', name: '溫兆倫', age: 21, sex: "boy" }
+            ],
+
+        },
+        computed: {
+            filterArr() {
+                return this.personArr.filter((p) => {
+                    return p.name.indexOf(this.keyWord) !== -1
+                })
+            }
+        }
+    });
+</script>
+
+</html>

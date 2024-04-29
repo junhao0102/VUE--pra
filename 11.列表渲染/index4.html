@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>computed</title>
+</head>
+
+<body>
+    <div id="root">
+        <h1>成員列表</h1>
+        <input placeholder="請輸入名字" v-model="keyWord">
+        <button @click="sortType=2">年齡升序</button>
+        <button @click="sortType=1">年齡降序</button>
+        <button @click="sortType=0">原順序 </button>
+        <ul>
+            <li v-for="(p,index) in filterArr" :key="p.id">
+                {{p.name}}--{{p.age}}--{{p.sex}}
+            </li>
+        </ul>
+    </div>
+
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#root',        //0原順序 1降序 2升序
+        data: {
+            sortType: 0,
+            keyWord: '',
+            personArr: [
+                { id: '001', name: '馬冬梅', age: 18, sex: "girl" },
+                { id: '002', name: '周冬雨', age: 66, sex: "girl" },
+                { id: '003', name: '周杰倫', age: 45, sex: "boy" },
+                { id: '004', name: '溫兆倫', age: 65, sex: "boy" }
+            ],
+
+        },
+        computed: {
+            filterArr() {
+                const arr = this.personArr.filter((p) => {
+                    return p.name.indexOf(this.keyWord) !== -1
+                })
+
+                if (this.sortType){
+                    
+                    arr.sort((a,b)=>{
+                        return this.sortType === 1 ? b.age - a.age : a.age - b.age
+                    })
+                }
+                return arr
+            }
+        }
+    });
+</script>
+
+</html>

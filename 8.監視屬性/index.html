@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>watch</title>
+</head>
+
+<body>
+
+    <!-- <div id="root">
+        <h1>今天天氣{{weather}}</h1>
+        <button @click = "changeweather">切換天氣</button>
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                isHot: true,
+            }, 
+            //計算屬性也能被監視
+            computed:{
+                weather(){
+                    return this.isHot ?'炎熱':'涼爽'; 
+                }
+            },
+            methods: {
+                changeweather(){
+                    this.isHot = !this.isHot;
+                }
+            },
+            watch:{
+                isHot:{
+                    handler(newVal,oldVal){
+                        console.log(newVal,oldVal);
+                }
+                }
+            }
+        
+        });
+    </script> -->
+
+    <!-- 深度監視 -->
+    <div id="root">
+        <h1>今天天氣{{weather}}</h1>
+        <button @click="changeweather">切換天氣</button>
+        <hr>
+        <h1>數字a:{{numbers.a}}</h1>
+        <button @click="numbers.a++">點我加一</button>
+        <button @click="numbers.b++">點我加一</button>
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                isHot: true,
+                numbers: {
+                    a: 1,
+                    b: 2
+                }
+            },
+            computed: {
+                weather() {
+                    return this.isHot ? '炎熱' : '涼爽';
+                }
+            },
+            methods: {
+                changeweather() {
+                    this.isHot = !this.isHot;
+                }
+            },
+            watch: {
+                isHot: {
+                    handler(newVal, oldVal) {
+                        console.log(newVal, oldVal);
+                    }
+                    //監視多級結構某個屬性變化
+                // }, 'numbers.a': {
+                //     handler() {
+                //         console.log('numbers.a發生變化');
+                //     }
+                // },
+                // 'numbers.b': {
+                //     handler() {
+                //         console.log('numbers.b發生變化');
+                //     },
+                    //監視多級結構所有屬性變化
+                    },
+                    numbers: {
+                        deep: true,
+                        handler() {
+                            console.log('numbers發生變化')
+                        }
+                    }
+                }
+
+            }
+        );
+    </script>
+
+</body>
+
+</html>
