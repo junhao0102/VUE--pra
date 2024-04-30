@@ -12,3 +12,5 @@
 $ vm.$set(vm.XXX,index,value)
 ```
 這些方法的使用會觸發 Vue 檢測到陣列的變化，並重新解析模板。
+
+### v-cloak  搭配css diplay:none   能解決頁面慢出現程式的html問題，等VUE接管才解析模板
