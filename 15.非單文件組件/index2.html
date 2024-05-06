@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>組件嵌套</title>
+</head>
+
+<body>
+    <div id="root">
+        <app></app> 
+    </div>
+
+
+
+</body>
+
+<script>
+   
+
+    const student = Vue.extend({
+        template: `
+        <div>
+            <h1>學生姓名:{{name}}</h1>
+            <h1>學生年齡:{{age}}</h1>
+        </div>
+        `,
+        data() {
+            return {
+                name: '小明',
+                age: 18
+            }
+        }
+    })
+
+    const school = Vue.extend({
+        template: `
+        <div>
+            <h1>學校名稱:{{name}}</h1>
+            <h1>學校地址:{{address}}</h1>
+            <student></student>
+        </div>
+        `,
+        data() {
+            return {
+                name: '台北市立大學',
+                address: '台北市大安區'
+            }
+        },
+        components: {
+            'student': student
+        }
+    })
+    
+    const hello = Vue.extend({
+        template: `
+        <div>
+            <h1>{{msg}}</h1>
+        </div>
+        `,
+        data(){
+            return{
+                msg:'Hello Vue'
+            }
+        }
+    })
+    const app = Vue.extend({
+        template: `
+        <div>
+            <hello></hello>
+            <school></school>
+        </div>
+        `,
+        components: {
+            'school': school,
+            'hello':hello
+        }
+    })
+    
+    new Vue({
+        el: '#root',
+        components: {
+            'app': app
+        },
+
+
+    })
+
+
+</script>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>非單文件組件</title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 組件標籤 -->
+        <hello></hello>
+        <school></school>
+
+        <student></student>
+    </div>
+
+    <hr>
+
+
+    <div id="child">
+        <hello></hello>
+    </div>
+
+</body>
+
+<script>
+    // 定義學校組件
+    const school = Vue.extend({
+        template: `
+        <div>
+            <h1>學校名稱:{{schoolName}}</h1>
+            <h1>學校地址:{{schoolAddress}}</h1>
+        </div>
+        `,
+        data() {
+            return {
+                schoolName: '台北市立大學',
+                schoolAddress: '台北市大安區'
+            }
+        }
+    })
+    // 定義學生組件
+    const student = Vue.extend({
+        template: `
+        <div>
+            <h1>學生姓名:{{studentName}}</h1>
+            <h1>學生年紀:{{studentAge}}</h1>
+        </div>
+        `,
+        data() {
+            return {
+                studentName: '小明',
+                studentAge: 18
+            }
+        }
+    })
+
+
+    const hello = Vue.extend({
+        template: `
+        <div>
+            <h1>你好啊{{name}}</h1>
+        </div>
+        `,
+        data() {
+            return {
+                name: 'TOM'
+            }
+        }
+    })
+
+
+    //全局註冊
+    Vue.component('hello', hello)
+
+
+    new Vue({
+        el: '#root',
+        //局部註冊學校組件
+        components: {
+            'school': school,
+            'student': student
+        }
+    })
+    new Vue({
+        el: '#child',
+    })
+
+</script>
+
+</html>
